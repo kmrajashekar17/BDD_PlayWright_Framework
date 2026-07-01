@@ -16,15 +16,18 @@ BeforeAll(async () => {
     const executionId = DateHelper.getFileTimestamp();
     Logger.info(`Execution Started : ${executionId}`);
 
-    //#region [launch browser]
+    const isGitHub =
+        process.env.GITHUB_ACTIONS === 'true';
+
     browser = await chromium.launch({
-        headless: ENV.headless,
+        headless: isGitHub ? true : ENV.headless,
         slowMo: ENV.slowMo,
-        args: ['--start-maximized']
+        ...(isGitHub ? {} : { args: ['--start-maximized'] })
     });
 
-    console.log('Browser launched');
-    //#endregion
+    console.log(
+        `Browser launched. GitHub=${isGitHub}`
+    );
 });
 //#endregion
 
