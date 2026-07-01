@@ -8,14 +8,26 @@ on:
   schedule:
     - cron: '30 20 * * *' # 2:00 AM IST
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   validate-login:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,6 +58,17 @@ jobs:
       - name: Generate Allure Report
         if: always()
         run: allure generate reports/allure-results --clean -o reports/allure-report
+
+      - name: Upload Pages Artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports/allure-report
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Upload Allure Report
         if: always()
