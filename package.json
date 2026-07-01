@@ -1,0 +1,37 @@
+{
+  "name": "bdd_playwright_framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:smoke": "cucumber-js --tags \"@smoke\"",
+    "test:regression": "cucumber-js --tags \"@regression\"",
+    "test:headed": "set HEADLESS=false&& cucumber-js",
+    "test:chrome": "set BROWSER=chromium&& cucumber-js",
+    "test:firefox": "set BROWSER=firefox&& cucumber-js",
+    "test:edge": "set BROWSER=msedge&& cucumber-js",
+    "clean": "rmdir /s /q reports 2>nul || exit 0",
+    "allure:generate": "npx allure-commandline generate reports/allure-results --clean -o reports/allure-report",
+    "allure:open": "npx allure-commandline open reports/allure-report",
+    "report": "ts-node scripts/GenerateAllureReport.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1",
+    "allure-commandline": "^2.43.0",
+    "allure-cucumberjs": "^3.10.2",
+    "allure-js-commons": "^3.10.2",
+    "playwright": "^1.61.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^13.0.0",
+    "dotenv": "^17.4.2",
+    "ts-node": "^10.9.2"
+  }
+}

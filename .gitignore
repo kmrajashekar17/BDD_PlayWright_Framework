@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# Allure Reports
+reports/allure-report/
+reports/allure-results/
+reports/screenshots/
+reports/archive/
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Temporary Files
+*.tmp
+*.bak
+structure.txt
