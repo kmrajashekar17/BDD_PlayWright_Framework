@@ -73,6 +73,9 @@ After(async function (this: CustomWorld, scenario) {
 
         await this.attach(screenshot, 'image/png');
         Logger.error(`Screenshot captured : ${filePath}`);
+        Logger.error(`Scenario failed : ${scenario.pickle.name}`);
+        Logger.error(`${scenario.result.message}`);
+        
     }
 
     ScenarioContext.clear();

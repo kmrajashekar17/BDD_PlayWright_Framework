@@ -21,8 +21,7 @@ module.exports = {
 
         format: [
             'progress-bar',
-             'allure-cucumberjs/reporter'
-            // 'allure-cucumberjs'
+             'allure-cucumberjs/reporter'           
         ],
 
         formatOptions: {

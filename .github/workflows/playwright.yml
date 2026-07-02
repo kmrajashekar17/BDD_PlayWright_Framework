@@ -60,18 +60,18 @@ jobs:
         run: allure generate reports/allure-results --clean -o reports/allure-report
 
       - name: Upload Pages Artifact
-        if: success()
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: reports/allure-report
 
       - name: Deploy to GitHub Pages
-        if: success()
+        if: always()
         id: deployment
         uses: actions/deploy-pages@v4
 
       - name: Upload Allure Report
-        if: success()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
@@ -79,7 +79,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Upload Allure Results
-        if: success()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
@@ -87,7 +87,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Upload Screenshots
-        if: success()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
