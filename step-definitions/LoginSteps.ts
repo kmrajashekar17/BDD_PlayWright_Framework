@@ -1,40 +1,50 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Then, When } from '@cucumber/cucumber';
 import { ENV } from '../config/env';
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardPage } from '../pages/DashboardPage';
 import { CustomWorld } from '../support/CustomWorld';
 
-Given('user launches the application', async function(this: CustomWorld) {   
-    await this.pages.getLoginPage().openApplication();
+When('user enters admin username', async function(this: CustomWorld) {
+
+    await this.pages.get(LoginPage).enterUserName(ENV.username);
 });
 
-When('user enters username', async function(this: CustomWorld) {
-    await this.pages.getLoginPage().enterUserName(ENV.username);
-});
+When('user enters admin password', async function(this: CustomWorld) {
 
-When('user enters password', async function(this: CustomWorld) {
-    await this.pages.getLoginPage().enterPassword(ENV.password);
+    await this.pages.get(LoginPage).enterPassword(ENV.password);
 });
 
 When('user clicks login button', async function(this: CustomWorld) {
-    await this.pages.getLoginPage().clickLogin();
-});
 
-Then('user should be logged in successfully', async function(this: CustomWorld) {
-    await this.pages.getLoginPage()
-                    .verifyLoginSuccessful();
-});
-
-When('user clicks logout button', async function(this: CustomWorld) {
-    await this.pages.getLoginPage()
-                    .clickLogout();
-});
-
-Then('login page should be displayed', async function(this: CustomWorld) {
-    await this.pages.getLoginPage()
-                    .verifyLoginPageDisplayed();
+    await this.pages.get(LoginPage).clickLogin();
 });
 
 When('user logs in as admin', async function(this: CustomWorld) {
 
-    await this.pages.getLoginPage()
-                    .loginAsAdmin();
+    await this.pages.get(LoginPage).loginAsAdmin();
+});
+
+Then('dashboard page should be displayed', async function(this: CustomWorld) {
+
+    await this.pages.get(DashboardPage).verifyDashboardDisplayed();
+});
+
+When('user opens admin page', async function(this: CustomWorld) {
+
+    await this.pages.get(DashboardPage).openAdminPage();
+});
+
+Then('admin page should be displayed', async function(this: CustomWorld) {
+
+    await this.pages.get(DashboardPage).verifyAdminPageDisplayed();
+});
+
+When('user logs out', async function(this: CustomWorld) {
+
+    await this.pages.get(DashboardPage).logout();
+});
+
+Then('login page should be displayed', async function(this: CustomWorld) {
+
+    await this.pages.get(LoginPage).verifyLoginPageDisplayed();
 });

@@ -1,81 +1,96 @@
 import { expect, Page } from '@playwright/test';
-import { BasePage } from '../framework/base/BasePage';
 import { ENV } from '../config/env';
+import { BasePage } from '../framework/base/BasePage';
 
 export class LoginPage extends BasePage {
 
-    //#region Locators
-    private readonly userNameInput =this.page.locator("//input[@name='txtUserName']");
-    private readonly passwordInput =this.page.locator("input[name='txtPassword']");
-    private readonly loginButton =this.page.locator("input[type='Submit']");
-    private readonly logoutLink =this.page.getByRole('link',{ name: 'Logout' });   
+    //#region [Locators]
+    private readonly usernameInput = this.page.getByPlaceholder('Username');
+    private readonly passwordInput = this.page.getByPlaceholder('Password');
+    private readonly loginButton = this.page.getByRole('button', { name: 'Login' });
     //#endregion
 
-    //#region Constructor
+    //#region [Constructor]
     constructor(page: Page) {
+
         super(page);
     }
     //#endregion
 
-    //#region Navigation
+    //#region [Navigation Methods]
     public async openApplication(): Promise<void> {
+
+        this.logger.info('Opening application');
+
         await this.page.goto(ENV.baseUrl);
-        await this.operation.waitForLoadState('networkidle');
+
+        await expect(this.usernameInput,'Username textbox was not displayed').toBeVisible();
+
+        this.logger.success('Application opened');
     }
     //#endregion
 
-    //#region Actions
+    //#region [Action Methods]
     public async enterUserName(userName: string): Promise<void> {
-        await this.operation.waitForVisible(this.userNameInput);
-        await this.userNameInput.clear();
-        await this.userNameInput.fill(userName);
+
+        this.logger.info(`Entering username : ${userName}`);
+        await expect(this.usernameInput,'Username textbox was not visible').toBeVisible();
+        await this.usernameInput.fill(userName);
     }
 
     public async enterPassword(password: string): Promise<void> {
-        await this.passwordInput.clear();
+
+        this.logger.info('Entering password');
+        await expect(this.passwordInput,'Password textbox was not visible').toBeVisible();
         await this.passwordInput.fill(password);
     }
 
     public async clickLogin(): Promise<void> {
-        expect(this.loginButton).toBeEnabled();
+
+        this.logger.info('Clicking login button');
+
+        await expect(this.loginButton,'Login button was not visible').toBeVisible();
+
+        await expect(this.loginButton,'Login button was not enabled').toBeEnabled();
+
         await this.loginButton.click();
-    }
 
-    public async clickLogout(): Promise<void> {
-        expect(this.logoutLink).toBeEnabled();
-        await this.logoutLink
-            .click();
-    }
+        await this.operation.waitForLoadState('load');
 
+        this.logger.success('Login button clicked');
+    }
     //#endregion
 
-    //#region Business Methods
-    public async login(userName: string, password: string): Promise<void> {
-        this.logger.info(`Login started`);
+    //#region [Business Methods]
+    public async login(userName: string,password: string): Promise<void> {
+
+        this.logger.info('Login started');
+
         await this.enterUserName(userName);
+
         await this.enterPassword(password);
+
         await this.clickLogin();
-        this.logger.success(`Login completed`);
+
+        this.logger.success('Login completed');
     }
 
     public async loginAsAdmin(): Promise<void> {
+
         await this.login(ENV.username,ENV.password);
     }
     //#endregion
 
-    //#region Assertions
-    public async verifyLoginSuccessful(): Promise<void> {
-        await expect(this.logoutLink,'Logout link was not found after login').toHaveCount(1);
-        await expect(this.logoutLink,'Logout link is not visible after login').toBeVisible();
-    }
-
+    //#region [Verification Methods]
     public async verifyLoginPageDisplayed(): Promise<void> {
 
-        await expect(
-            this.loginButton,
-            'Login page not displayed'
-        ).toBeVisible();
+        this.logger.info('Verifying login page');
+
+        await expect(this.usernameInput,'Username textbox was not displayed').toBeVisible();
+
+        await expect(this.loginButton,'Login button was not displayed').toBeVisible();
+
+        this.logger.success('Login page verified');
     }
     //#endregion
-
 }

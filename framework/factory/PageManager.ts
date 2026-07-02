@@ -1,46 +1,19 @@
 import { Page } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
-import { DashboardPage } from '../../pages/DashboardPage';
-import { ProductPage } from '../../pages/ProductPage';
 
 export class PageManager {
 
-    //#region Variables
-    private readonly page: Page;
-    private loginPage?: LoginPage;
-    private dashboardPage?: DashboardPage;
-    private productPage?: ProductPage;
-    //#endregion
+    private readonly cache = new Map<string, unknown>();
 
-    //#region Constructor
-    constructor(page: Page) {
-        this.page = page;
-    }
-    //#endregion
+    constructor(private readonly page: Page) {}
 
-    //#region Page Objects
-    public getLoginPage(): LoginPage {
-        if (!this.loginPage)
-        {
-            this.loginPage = new LoginPage(this.page);
+    public get<T>(pageClass: new (page: Page) => T): T {
+
+        const key = pageClass.name;
+
+        if (!this.cache.has(key)) {
+            this.cache.set(key, new pageClass(this.page));
         }
-        return this.loginPage;
-    }
 
-    public getDashboardPage(): DashboardPage {
-        if (!this.dashboardPage)
-        {
-            this.dashboardPage = new DashboardPage(this.page);
-        }
-        return this.dashboardPage;
+        return this.cache.get(key) as T;
     }
-
-    public getProductPage(): ProductPage {
-        if (!this.productPage)
-        {
-            this.productPage = new ProductPage(this.page);
-        }
-        return this.productPage;
-    }
-    //#endregion
 }
