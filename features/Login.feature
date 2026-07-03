@@ -1,4 +1,3 @@
-@Login @allure.label.feature:Login
 Feature: Login Functionality
 
 Background: 
@@ -29,4 +28,4 @@ Then error message "<error_message>" should be displayed
 Examples:
 | username     | password     | error_message                |
 | invalid_user | invalid_pass | Invalid credentials          |
-| test123      | test456      | Invalid credenuials          |
+| test123      | test456      | Invalid credentials          |
