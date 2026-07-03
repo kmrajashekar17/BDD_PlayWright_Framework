@@ -1,3 +1,4 @@
+@allure.label.feature:Login
 Feature: Login Functionality
 
 Background: 
