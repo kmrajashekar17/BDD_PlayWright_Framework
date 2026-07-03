@@ -53,7 +53,7 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Execute Tests
-        run: npx cucumber-js --tags "@ValidateLogin"
+        run: npx cucumber-js
 
       - name: Generate Allure Report
         if: always()
