@@ -20,5 +20,13 @@ Then dashboard page should be displayed
 When user opens admin page
 Then admin page should be displayed
 
-
-
+@TC003 @InvalidLogin
+Scenario Outline: Verify login with invalid credentials
+When user enters "<username>" username
+And user enters "<password>" password
+And user clicks login button
+Then error message "<error_message>" should be displayed
+Examples:
+| username     | password     | error_message                |
+| invalid_user | invalid_pass | Invalid credentials          |
+| test123      | test456      | Invalid credenuials          |

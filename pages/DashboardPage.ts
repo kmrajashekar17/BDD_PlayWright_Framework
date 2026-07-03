@@ -44,8 +44,10 @@ export class DashboardPage extends BasePage {
     //#region [Verification Methods]
     public async verifyDashboardDisplayed(): Promise<void> {
         this.logger.info('Verifying dashboard page');
-        await expect(this.dashboardHeader,'Dashboard page was not displayed after login').toBeVisible();
-        this.logger.success('Dashboard page verified');
+        let textData:string|null = await this.dashboardHeader.textContent();
+        await expect(this.dashboardHeader,'Dashboard page was not displayed after login').toBeVisible();        
+        await expect(textData,'Dashboard page header text is incorrect').toBe('Dashboard');
+        this.logger.success('Dashboard page verified');        
     }
 
     public async verifyAdminPageDisplayed(): Promise<void> {

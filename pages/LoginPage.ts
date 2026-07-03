@@ -8,6 +8,7 @@ export class LoginPage extends BasePage {
     private readonly usernameInput = this.page.getByPlaceholder('Username');
     private readonly passwordInput = this.page.getByPlaceholder('Password');
     private readonly loginButton = this.page.getByRole('button', { name: 'Login' });
+    private readonly invalidCredentialsMessage = this.page.locator('div.oxd-alert-content--error p.oxd-text');
     //#endregion
 
     //#region [Constructor]
@@ -58,6 +59,13 @@ export class LoginPage extends BasePage {
         await this.operation.waitForLoadState('load');
 
         this.logger.success('Login button clicked');
+    }
+
+    public async verifyErrorMessageDisplayed(errorMessage: string): Promise<void> {
+        await this.operation.waitForLoadState('load');
+        await expect(this.invalidCredentialsMessage, 'Invalid credentials message was not displayed').toBeVisible();
+        await expect(this.invalidCredentialsMessage, 'Invalid credentials message text is incorrect').toHaveText(errorMessage);
+        await this.page.waitForTimeout(3000);
     }
     //#endregion
 
