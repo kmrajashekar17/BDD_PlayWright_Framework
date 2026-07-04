@@ -3,10 +3,12 @@ import { ENV } from '../config/env';
 import { LoginPage } from '../pages/LoginPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { CustomWorld } from '../support/CustomWorld';
+import { ScenarioContext } from '../framework/context/ScenarioContext';
 
 When('user enters admin username', async function(this: CustomWorld) {
 
     await this.pages.get(LoginPage).enterUserName(ENV.username);
+    ScenarioContext.set('username', ENV.username);
 });
 
 When('user enters admin password', async function(this: CustomWorld) {
@@ -17,6 +19,7 @@ When('user enters admin password', async function(this: CustomWorld) {
 When('user enters {string} username', async function(this: CustomWorld, userName: string) {
 
     await this.pages.get(LoginPage).enterUserName(userName);
+    ScenarioContext.set('username', userName);
 });
 
 When('user enters {string} password', async function(this: CustomWorld, password: string) {

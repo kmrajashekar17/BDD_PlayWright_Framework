@@ -6,6 +6,7 @@ import { ENV } from '../config/env';
 import { PageManager } from '../framework/factory/PageManager';
 import { DateHelper } from '../utils/DateHelper';
 import { Logger } from '../framework/core/Logger';
+import { ReportManager } from '../utils/ReportManager';
 import * as fs from 'fs';
 
 setDefaultTimeout(120000);
@@ -13,6 +14,9 @@ let browser: Browser;
 
 //#region Before All
 BeforeAll(async () => {
+
+     ReportManager.prepareExecution();
+     
     const executionId = DateHelper.getFileTimestamp();
     Logger.info(`Execution Started : ${executionId}`);
 
@@ -75,7 +79,7 @@ After(async function (this: CustomWorld, scenario) {
         Logger.error(`Screenshot captured : ${filePath}`);
         Logger.error(`Scenario failed : ${scenario.pickle.name}`);
         Logger.error(`${scenario.result.message}`);
-        
+
     }
 
     ScenarioContext.clear();

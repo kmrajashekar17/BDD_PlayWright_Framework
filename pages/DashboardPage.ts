@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { BasePage } from '../framework/base/BasePage';
+import { ScenarioContext } from '../framework/context/ScenarioContext';
 
 export class DashboardPage extends BasePage {
 
@@ -35,9 +36,8 @@ export class DashboardPage extends BasePage {
         await this.userDropdown.click();
         await expect(this.logoutLink,'Logout link was not visible').toBeVisible();
         await expect(this.logoutLink,'Logout link was not enabled').toBeEnabled();
-        await this.logoutLink.click();
-
-        this.logger.success('Logout completed');
+        await this.logoutLink.click();        
+        this.logger.success(`Logout completed for User ${ScenarioContext.get('username')}`);
     }
     //#endregion
 
@@ -47,7 +47,7 @@ export class DashboardPage extends BasePage {
         let textData:string|null = await this.dashboardHeader.textContent();
         await expect(this.dashboardHeader,'Dashboard page was not displayed after login').toBeVisible();        
         await expect(textData,'Dashboard page header text is incorrect').toBe('Dashboard');
-        this.logger.success('Dashboard page verified');        
+        this.logger.success('Dashboard page verified');                
     }
 
     public async verifyAdminPageDisplayed(): Promise<void> {
