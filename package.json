@@ -14,7 +14,8 @@
     "clean": "rmdir /s /q reports 2>nul || exit 0",
     "allure:generate": "npx allure-commandline generate reports/allure-results --clean -o reports/allure-report",
     "allure:open": "npx allure-commandline open reports/allure-report",
-    "report": "ts-node scripts/GenerateAllureReport.ts"
+    "report": "ts-node scripts/GenerateAllureReport.ts",
+    "test:api": "cucumber-js --tags \"@APITests\""
   },
   "keywords": [],
   "author": "",

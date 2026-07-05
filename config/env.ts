@@ -28,5 +28,11 @@ export const ENV = {
     timeout:
         Number(
             process.env.TIMEOUT ?? 30000
-        )
+        ),
+
+    apiBaseUrl:
+        process.env.API_BASE_URL ?? '',
+
+    reqresApiKey:
+        process.env.REQRES_API_KEY ?? ''
 };

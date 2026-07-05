@@ -13,7 +13,7 @@ export abstract class BasePage {
     protected readonly softAssertion: SoftAssertions;
     protected readonly logger = Logger;
 
-    constructor(page: Page) {
+    constructor(page: Page){
         this.page = page;
         this.operation =new Operations(page);
         this.assertion =new Assertions();

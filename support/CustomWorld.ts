@@ -6,15 +6,14 @@ import {
 } from '@cucumber/cucumber';
 
 import {
+    APIRequestContext,
     BrowserContext,
     Page
 } from '@playwright/test';
 
 import { PageManager } from '../framework/factory/PageManager';
 
-export class CustomWorld
-    extends World
-    implements IWorld {
+export class CustomWorld extends World implements IWorld {
 
     public context!: BrowserContext;
 
@@ -22,8 +21,9 @@ export class CustomWorld
 
     public pages!: PageManager;
 
-    constructor(options: IWorldOptions) {
+    public apiRequest!: APIRequestContext;
 
+    constructor(options: IWorldOptions){
         super(options);
     }
 }

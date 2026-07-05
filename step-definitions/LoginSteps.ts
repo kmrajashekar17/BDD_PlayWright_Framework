@@ -5,65 +5,48 @@ import { DashboardPage } from '../pages/DashboardPage';
 import { CustomWorld } from '../support/CustomWorld';
 import { ScenarioContext } from '../framework/context/ScenarioContext';
 
-When('user enters admin username', async function(this: CustomWorld) {
-
-    await this.pages.get(LoginPage).enterUserName(ENV.username);
-    ScenarioContext.set('username', ENV.username);
+When(/^user enters(?: "([^"]+)")? username$/,async function(this: CustomWorld, userName?: string){
+    const actualUserName = userName || ENV.username;
+    await this.pages.get(LoginPage).enterUserName(actualUserName);
+    ScenarioContext.set('username', actualUserName);
 });
 
-When('user enters admin password', async function(this: CustomWorld) {
-
+When('user enters admin password',async function(this: CustomWorld){
     await this.pages.get(LoginPage).enterPassword(ENV.password);
 });
 
-When('user enters {string} username', async function(this: CustomWorld, userName: string) {
-
-    await this.pages.get(LoginPage).enterUserName(userName);
-    ScenarioContext.set('username', userName);
-});
-
-When('user enters {string} password', async function(this: CustomWorld, password: string) {
-
+When('user enters {string} password',async function(this: CustomWorld, password: string){
     await this.pages.get(LoginPage).enterPassword(password);
 });
 
-
-Then('error message {string} should be displayed', async function(this: CustomWorld, errorMessage: string) {
-
+Then('error message {string} should be displayed',async function(this: CustomWorld, errorMessage: string){
     await this.pages.get(LoginPage).verifyErrorMessageDisplayed(errorMessage);
 });
 
-When('user clicks login button', async function(this: CustomWorld) {
-
+When('user clicks login button',async function(this: CustomWorld){
     await this.pages.get(LoginPage).clickLogin();
 });
 
-When('user logs in as admin', async function(this: CustomWorld) {
-
+When('user logs in as admin',async function(this: CustomWorld){
     await this.pages.get(LoginPage).loginAsAdmin();
 });
 
-Then('dashboard page should be displayed', async function(this: CustomWorld) {
-
+Then('dashboard page should be displayed',async function(this: CustomWorld){
     await this.pages.get(DashboardPage).verifyDashboardDisplayed();
 });
 
-When('user opens admin page', async function(this: CustomWorld) {
-
+When('user opens admin page',async function(this: CustomWorld){
     await this.pages.get(DashboardPage).openAdminPage();
 });
 
-Then('admin page should be displayed', async function(this: CustomWorld) {
-
+Then('admin page should be displayed',async function(this: CustomWorld){
     await this.pages.get(DashboardPage).verifyAdminPageDisplayed();
 });
 
-When('user logs out', async function(this: CustomWorld) {
-
+When('user logs out',async function(this: CustomWorld){
     await this.pages.get(DashboardPage).logout();
 });
 
-Then('login page should be displayed', async function(this: CustomWorld) {
-
+Then('login page should be displayed',async function(this: CustomWorld){
     await this.pages.get(LoginPage).verifyLoginPageDisplayed();
 });

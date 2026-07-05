@@ -17,7 +17,7 @@ export const BrowserConfig = {
 
     assertionTimeout:
         Number(process.env.ASSERT_TIMEOUT ?? 5000),
-
+        
     video:
         process.env.VIDEO ??
         'retain-on-failure',

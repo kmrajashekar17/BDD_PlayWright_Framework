@@ -2,13 +2,8 @@ export class StringHelper {
 
     //#region Equals Ignore Case
 
-    public static equalsIgnoreCase(
-        source: string,
-        target: string
-    ): boolean {
-
-        return source.toLowerCase()
-            === target.toLowerCase();
+    public static equalsIgnoreCase(source: string,target: string):boolean{
+        return source.toLowerCase() === target.toLowerCase();
     }
 
     //#endregion
@@ -16,16 +11,8 @@ export class StringHelper {
 
     //#region Contains Ignore Case
 
-    public static containsIgnoreCase(
-        source: string,
-        target: string
-    ): boolean {
-
-        return source
-            .toLowerCase()
-            .includes(
-                target.toLowerCase()
-            );
+    public static containsIgnoreCase(source: string,target: string):boolean{
+        return source.toLowerCase().includes(target.toLowerCase());
     }
 
     //#endregion
@@ -33,12 +20,8 @@ export class StringHelper {
 
     //#region Is Null Or Empty
 
-    public static isNullOrEmpty(
-        value: string
-    ): boolean {
-
-        return !value ||
-               value.trim() === '';
+    public static isNullOrEmpty(value: string):boolean{
+        return !value || value.trim() === '';
     }
 
     //#endregion

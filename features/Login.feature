@@ -1,4 +1,3 @@
-@allure.label.feature:Login
 Feature: Login Functionality
 
 Background: 
@@ -6,7 +5,7 @@ Given user launches the application
 
 @TC001 @ValidateLogin
 Scenario: Verify login and logout
-When user enters admin username
+When user enters username
 And user enters admin password
 And user clicks login button
 Then dashboard page should be displayed

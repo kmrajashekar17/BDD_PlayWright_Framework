@@ -2,10 +2,8 @@ export class DateHelper {
 
     //#region Current Date
 
-    public static getCurrentDate(): string {
-
-        return new Date()
-            .toLocaleDateString();
+    public static getCurrentDate():string{
+        return new Date().toLocaleDateString();
     }
 
     //#endregion
@@ -13,10 +11,8 @@ export class DateHelper {
 
     //#region Current Time
 
-    public static getCurrentTime(): string {
-
-        return new Date()
-            .toLocaleTimeString();
+    public static getCurrentTime():string{
+        return new Date().toLocaleTimeString();
     }
 
     //#endregion
@@ -24,47 +20,31 @@ export class DateHelper {
 
     //#region Current Timestamp
 
-    public static getTimeStamp(): string {
-
-        return Date.now()
-            .toString();
+    public static getTimeStamp():string{
+        return Date.now().toString();
     }
 
     //#endregion
 
 
     //#region Add Days
-    public static addDays(
-        days: number
-    ): Date {
-
-        const date =
-            new Date();
-
-        date.setDate(
-            date.getDate() + days
-        );
-
+    public static addDays(days: number):Date{
+        const date = new Date();
+        date.setDate(date.getDate() + days);
         return date;
     }
     //#endregion
 
     //#region File Timestamp
 
-    public static getFileTimestamp(): string {
-
+    public static getFileTimestamp():string{
         const date = new Date();
         const yyyy = date.getFullYear();
-        const mm = String(date.getMonth() + 1)
-                    .padStart(2, '0');
-        const dd = String(date.getDate())
-                    .padStart(2, '0');
-        const hh = String(date.getHours())
-                    .padStart(2, '0');
-        const min = String(date.getMinutes())
-                    .padStart(2, '0');
-        const ss = String(date.getSeconds())
-                    .padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        const hh = String(date.getHours()).padStart(2, '0');
+        const min = String(date.getMinutes()).padStart(2, '0');
+        const ss = String(date.getSeconds()).padStart(2, '0');
         return `${yyyy}${mm}${dd}_${hh}${min}${ss}`;
     }
     //#endregion

@@ -4,10 +4,8 @@ export class AlertHelper {
 
     //#region Accept
 
-    public static async accept(page: Page): Promise<void> {
-
-        page.once('dialog', async (dialog: Dialog) => {
-
+    public static async accept(page: Page):Promise<void>{
+        page.once('dialog',async (dialog: Dialog)=>{
             await dialog.accept();
         });
     }
@@ -17,13 +15,8 @@ export class AlertHelper {
 
     //#region Accept With Text
 
-    public static async acceptWithText(
-        page: Page,
-        text: string
-    ): Promise<void> {
-
-        page.once('dialog', async (dialog: Dialog) => {
-
+    public static async acceptWithText(page: Page,text: string):Promise<void>{
+        page.once('dialog',async (dialog: Dialog)=>{
             await dialog.accept(text);
         });
     }
@@ -33,10 +26,8 @@ export class AlertHelper {
 
     //#region Dismiss
 
-    public static async dismiss(page: Page): Promise<void> {
-
-        page.once('dialog', async (dialog: Dialog) => {
-
+    public static async dismiss(page: Page):Promise<void>{
+        page.once('dialog',async (dialog: Dialog)=>{
             await dialog.dismiss();
         });
     }
@@ -46,16 +37,11 @@ export class AlertHelper {
 
     //#region Get Message
 
-    public static async getMessage(page: Page): Promise<string> {
-
-        return new Promise((resolve) => {
-
-            page.once('dialog', async (dialog: Dialog) => {
-
+    public static async getMessage(page: Page):Promise<string>{
+        return new Promise((resolve)=>{
+            page.once('dialog',async (dialog: Dialog)=>{
                 const message = dialog.message();
-
                 await dialog.accept();
-
                 resolve(message);
             });
         });

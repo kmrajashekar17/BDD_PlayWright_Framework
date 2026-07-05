@@ -4,8 +4,7 @@ export class FileHelper {
 
     //#region Exists
 
-    public static exists(path: string): boolean {
-
+    public static exists(path: string):boolean{
         return fs.existsSync(path);
     }
 
@@ -14,12 +13,8 @@ export class FileHelper {
 
     //#region Read
 
-    public static read(path: string): string {
-
-        return fs.readFileSync(
-            path,
-            'utf-8'
-        );
+    public static read(path: string):string{
+        return fs.readFileSync(path,'utf-8');
     }
 
     //#endregion
@@ -27,15 +22,8 @@ export class FileHelper {
 
     //#region Write
 
-    public static write(
-        path: string,
-        content: string
-    ): void {
-
-        fs.writeFileSync(
-            path,
-            content
-        );
+    public static write(path: string,content: string):void{
+        fs.writeFileSync(path,content);
     }
 
     //#endregion
@@ -43,15 +31,8 @@ export class FileHelper {
 
     //#region Append
 
-    public static append(
-        path: string,
-        content: string
-    ): void {
-
-        fs.appendFileSync(
-            path,
-            content
-        );
+    public static append(path: string,content: string):void{
+        fs.appendFileSync(path,content);
     }
 
     //#endregion
@@ -59,12 +40,8 @@ export class FileHelper {
 
     //#region Delete
 
-    public static delete(
-        path: string
-    ): void {
-
-        if (fs.existsSync(path))
-        {
+    public static delete(path: string):void{
+        if (fs.existsSync(path)){
             fs.unlinkSync(path);
         }
     }
